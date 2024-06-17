@@ -6,12 +6,12 @@
 Developing android ndk apps with vscode
 
 
-### precondition
-- vscode
-- vscode C/C++ Extension Pack
-- vscode CMake Tools Extension
-- CMake
-- Android SDK
+#### precondition
+    - vscode
+    - vscode C/C++ Extension Pack
+    - vscode CMake Tools Extension
+    - CMake
+    - Android SDK
 
 modify the environment variables in the `CMakePresets.json` file and replace them with your local environment.
 
@@ -25,6 +25,7 @@ modify the environment variables in the `CMakePresets.json` file and replace the
 }
 ```
 
+The file `.vscode/c_cpp_properties.json` should be in your directory
 
 refe
 - https://developer.android.com/ndk/guides/cmake#command-line_2
