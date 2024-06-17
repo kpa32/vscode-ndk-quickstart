@@ -22,7 +22,7 @@
                 "CMAKE_SYSTEM_VERSION": "${env:SDK}",
                 "CMAKE_ANDROID_ARCH_ABI": "${env:ARCH}",
                 "ANDROID_ABI": "${env:ARCH}",
-                "ANDROID_STL": "c++_shared"
+                "ANDROID_STL": "c++_static"
             },
             "environment": {
                 "ANDROID_SDK_HOME": "D:/ProgramData/Android",

@@ -1,0 +1,53 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "forward lldb",
+            "type": "shell",
+            "command": "adb forward tcp:5039 tcp:5039"
+        },
+        {
+            "label": "kill lldb",
+            "type": "shell",
+            "command": "adb shell su -c kill -9 $(pidof lldb-server)",
+            "args": [
+                //"shell","su","-c","kill","-9","$(pidof lldb-server)"
+            ],
+        },
+        {
+            "label": "push lldb",
+            "type": "shell",
+            "command": "adb",
+            "args": [
+                "push",
+                "${env:ANDROID_SDK_HOME}/ndk/27.0.11902837/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/lib/linux/aarch64/lldb-server",
+                "/data/local/tmp/lldb-server"
+            ]
+        },
+        {
+            "label": "chmod lldb",
+            "type": "shell",
+            "command": "adb",
+            "args": [
+                "shell","su","-c","chmod","+x","/data/local/tmp/lldb-server"
+            ]
+        },
+        {
+            "label": "start lldb",
+            "type": "shell",
+            "command": "adb",
+            "args": [
+                "shell","su","-c","nohup ./data/local/tmp/lldb-server platform --server --listen *:5039"
+            ],
+            "dependsOn":["forward lldb","kill lldb","push lldb","chmod lldb"],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "echo",
+            "type":"shell",
+            "command":"echo ${command:cmake.launchTargetPath}"
+        }
+    ]
+}

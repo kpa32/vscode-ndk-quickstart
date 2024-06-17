@@ -1,0 +1,52 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            //adb shell /data/local/tmp/lldb-server platform --server --listen unix-abstract:///data/local/tmp/debug.sock
+            //"platform connect unix-abstract-connect:///data/local/tmp/debug.sock"
+            "name": "Remote launch",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}", // Local path.
+            "initCommands": [
+                "platform select remote-android", // For example: 'remote-linux', 'remote-macosx', 'remote-android', etc.
+                "platform connect connect://localhost:5039",
+                "platform settings -w /data/local/tmp",
+                "settings set target.inherit-env false", // See note below.
+                "platform status",
+                //"file ${command:cmake.launchTargetPath}",
+                //"run"
+            ],
+            "env": {
+                //"PATH": "/data/local/tmp/", // See note below.
+            }
+        },
+        {
+            "name": "Remote attach",
+            "type": "lldb",
+            "request": "attach",
+            //"pid": "${command:pickMyProcess}",
+            "pid": "${input:pickPid}",
+            "initCommands": [
+                "platform select remote-android", 
+                "platform connect connect://localhost:5039",
+                "platform settings -w /data/local/tmp",
+                "settings set target.inherit-env false", 
+                "platform status",
+            ]
+        },
+
+        
+
+    ],
+    "inputs": [
+        {
+            "id": "pickPid",
+            "type": "promptString",
+            "description": "Enter process id"
+        }
+    ]
+}
