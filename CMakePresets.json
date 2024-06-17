@@ -1,0 +1,97 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 19,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "android-base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${env:BUILD_TYPE}/${env:ARCH}",
+            "cmakeExecutable": "${env:ANDROID_SDK_HOME}/cmake/${env:CMAKE}/bin/cmake",
+            "cacheVariables": {
+                "CMAKE_ANDROID_NDK": "${env:ANDROID_NDK_HOME}",
+                "CMAKE_MAKE_PROGRAM": "${env:ANDROID_SDK_HOME}/cmake/${env:CMAKE}/bin/ninja",
+                "CMAKE_TOOLCHAIN_FILE": "${env:ANDROID_SDK_HOME}/ndk/${env:NDK}/build/cmake/android.toolchain.cmake",
+                "CMAKE_SYSTEM_NAME": "Android",
+                "CMAKE_BUILD_TYPE": "${env:BUILD_TYPE}",
+                "ANDROID_PLATFORM": "android-${env:SDK}",
+                "CMAKE_SYSTEM_VERSION": "${env:SDK}",
+                "CMAKE_ANDROID_ARCH_ABI": "${env:ARCH}",
+                "ANDROID_ABI": "${env:ARCH}",
+                "ANDROID_STL": "c++_shared"
+            },
+            "environment": {
+                "ANDROID_SDK_HOME": "D:/ProgramData/Android",
+                "CMAKE": "3.22.1",
+                "NDK": "27.0.11718014",
+                "SDK": "22",
+                "ARCH": "arm64-v8a",
+                "BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "debug-x86",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "x86"
+            }
+        },
+        {
+            "name": "debug-x86_64",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "x86_64"
+            }
+        },
+        {
+            "name": "debug-armeabi-v7a",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "armeabi-v7a"
+            }
+        },
+        {
+            "name": "debug-arm64-v8a",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "arm64-v8a"
+            }
+        },
+        {
+            "name": "release-x86",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "x86",
+                "BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "release-x86_64",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "x86_64",
+                "BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "release-armeabi-v7a",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "armeabi-v7a",
+                "BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "release-arm64-v8a",
+            "inherits": "android-base",
+            "environment": {
+                "ARCH": "arm64-v8a",
+                "BUILD_TYPE": "Release"
+            }
+        }
+    ]
+}
