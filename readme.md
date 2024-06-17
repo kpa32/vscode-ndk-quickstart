@@ -29,11 +29,15 @@ The file `.vscode/c_cpp_properties.json` should be in your directory
 
 
 
-### lldb debug
+### Debug
 
 Android has removed gdb since ndk 23 and now uses lldb for debugging.
 
 plugin [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
+
+the demo `/data/local/tmp/HelloWorld` may not have execute permissions.
+
+use `adb shell su -c chmod 777 /data/local/tmp/HelloWorld`
 
 refe
 - https://developer.android.com/ndk/guides/cmake#command-line_2
